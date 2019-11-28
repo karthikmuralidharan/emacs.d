@@ -54,19 +54,11 @@
       (define-key map (kbd "C-c b") 'go-run)
       (define-key map (kbd "C-h f") 'godoc-at-point))
 
-    ;; Prefer goimports to gofmt if installed
-    (let ((goimports (executable-find "goimports")))
-      (when goimports
-        (setq gofmt-command goimports)))
-
     ;; gofmt on save
-    (add-hook 'before-save-hook 'gofmt-before-save nil t)
+    (add-hook 'before-save-hook 'lsp-organize-imports nil t)
 
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
-
-    ;; Company mode settings
-    (set (make-local-variable 'company-backends) '(company-go))
 
     ;; El-doc for Go
     (go-eldoc-setup)
@@ -76,8 +68,16 @@
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
+  (add-hook 'go-mode-hook #'lsp)
+  
   (add-hook 'go-mode-hook (lambda ()
                             (run-hooks 'prelude-go-mode-hook))))
-
+  
+  (add-hook 'go-mode-hook (lambda ()
+                       "Enable golangci-lint."
+                       (setq flycheck-disabled-checkers '(go-build
+                                                          go-test
+                                                          go-errcheck
+                                                          go-staticcheck))))
 (provide 'prelude-go)
 ;;; prelude-go.el ends here
