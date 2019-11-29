@@ -35,7 +35,9 @@
                             company-go
                             go-eldoc
                             go-projectile
-                            gotest))
+                            gotest
+                            go-tag
+                            flycheck-golangci-lint))
 
 (require 'go-projectile)
 
@@ -55,6 +57,7 @@
       (define-key map (kbd "C-h f") 'godoc-at-point))
 
     ;; gofmt on save
+    (add-hook 'before-save-hook 'lsp-format-buffer nil t)
     (add-hook 'before-save-hook 'lsp-organize-imports nil t)
 
     ;; stop whitespace being highlighted
@@ -64,20 +67,28 @@
     (go-eldoc-setup)
 
     ;; CamelCase aware editing operations
-    (subword-mode +1))
+    (subword-mode +1)
+
+
+
+    (with-eval-after-load 'flycheck
+      "Enable golangci-lint."
+      (setq flycheck-disabled-checkers '(go-gofmt
+                                         go-golint
+                                         go-vet
+                                         go-build
+                                         go-test
+                                         go-errcheck))
+      (setq flycheck-golangci-lint-fast t)
+      (flycheck-golangci-lint-setup))
+    )
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
   (add-hook 'go-mode-hook #'lsp)
-  
+
   (add-hook 'go-mode-hook (lambda ()
                             (run-hooks 'prelude-go-mode-hook))))
-  
-  (add-hook 'go-mode-hook (lambda ()
-                       "Enable golangci-lint."
-                       (setq flycheck-disabled-checkers '(go-build
-                                                          go-test
-                                                          go-errcheck
-                                                          go-staticcheck))))
+
 (provide 'prelude-go)
 ;;; prelude-go.el ends here
