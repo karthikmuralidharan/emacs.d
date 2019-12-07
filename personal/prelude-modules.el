@@ -8,7 +8,11 @@
 (eval-when-compile
   ;; Following line is not needed if use-package.el is in ~/.emacs.d
   ;; Bootstrap `use-package'
-  (require 'use-package))
+  (require 'use-package)
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t))
+
+(require 'init-treemacs)
 
 ;; Emacs IRC client
 ;; (require 'prelude-erc)

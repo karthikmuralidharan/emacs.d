@@ -79,6 +79,6 @@
                                   magit-post-unstage)
                                  . treemacs-magit--schedule-update)))
 
-
+(provide 'init-treemacs)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-treemacs.el ends here
