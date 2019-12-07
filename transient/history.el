@@ -1,3 +1,4 @@
 ((magit-commit nil)
  (magit-diff
-  ("--no-ext-diff" "--stat")))
+  ("--no-ext-diff" "--stat"))
+ (magit-rebase nil))

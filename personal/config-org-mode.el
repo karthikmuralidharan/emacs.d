@@ -6,8 +6,6 @@
 
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-
-
 ;; Run/Highlight code using babel in org-mode
 (org-babel-do-load-languages
  'org-babel-load-languages

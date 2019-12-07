@@ -1,5 +1,15 @@
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
+;; This is only needed once, near the top of the file
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  ;; Bootstrap `use-package'
+  (require 'use-package))
+
 ;; Emacs IRC client
 ;; (require 'prelude-erc)
 (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
