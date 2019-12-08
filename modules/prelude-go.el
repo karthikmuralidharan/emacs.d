@@ -85,8 +85,6 @@
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
-  (add-hook 'go-mode-hook #'lsp)
-
   (add-hook 'go-mode-hook (lambda ()
                             (run-hooks 'prelude-go-mode-hook))))
 

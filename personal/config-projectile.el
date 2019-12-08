@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Emacs Prelude: Yasnippet.
+;;; config-projectile.el --- Emacs Prelude: prog-mode configuration
 ;;
 ;; Author: Karthik Muralidharan
 ;; Version: 1.0.0
@@ -29,10 +29,10 @@
 
 ;;; Code:
 
+(require 'projectile)
 
-;;; Adds yasnippet support
-(prelude-require-package 'yasnippet)
-(yas-global-mode +1)
+(with-eval-after-load 'projectile
+  (setq projectile-enable-caching t))
 
-(provide 'init-yasnippet)
-;;; init-yasnippet.el ends here
+(provide 'config-projectile)
+;;; config-projectile.el ends here

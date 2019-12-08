@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Emacs Prelude: Yasnippet.
+;;; config-vcs.el --- Emacs Prelude: VCS configurations.
 ;;
 ;; Author: Karthik Muralidharan
 ;; Version: 1.0.0
@@ -30,9 +30,20 @@
 ;;; Code:
 
 
-;;; Adds yasnippet support
-(prelude-require-package 'yasnippet)
-(yas-global-mode +1)
+;; Git related modes
+(use-package gitattributes-mode)
+(use-package gitconfig-mode)
+(use-package gitignore-mode)
 
-(provide 'init-yasnippet)
-;;; init-yasnippet.el ends here
+;; Walk through git revisions of a file
+(use-package git-timemachine
+  :custom-face
+  (git-timemachine-minibuffer-author-face ((t (:inherit success))))
+  (git-timemachine-minibuffer-detail-face ((t (:inherit warning)))))
+
+(use-package forge
+  :after magit
+  :commands (forge-pull))
+
+(provide 'config-vcs)
+;;; config-vcs.el ends here

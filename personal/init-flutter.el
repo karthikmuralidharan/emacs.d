@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Emacs Prelude: Yasnippet.
+;;; init-flutter.el --- Emacs Prelude: Flutter setup.
 ;;
 ;; Author: Karthik Muralidharan
 ;; Version: 1.0.0
@@ -29,10 +29,24 @@
 
 ;;; Code:
 
+;; Assuming usage with dart-mode
+(use-package dart-mode
+  :after (projectile lsp)
+  :config
+  (with-eval-after-load 'projectile
+    (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+    (add-to-list 'projectile-project-root-files-bottom-up "BUILD")))
 
-;;; Adds yasnippet support
-(prelude-require-package 'yasnippet)
-(yas-global-mode +1)
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload)))
 
-(provide 'init-yasnippet)
-;;; init-yasnippet.el ends here
+;; Optional
+(use-package flutter-l10n-flycheck
+  :after flutter
+  :config
+  (flutter-l10n-flycheck-setup))
+
+(provide 'init-flutter)
+;;; init-flutter.el ends here

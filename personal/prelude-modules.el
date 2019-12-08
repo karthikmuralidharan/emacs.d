@@ -12,14 +12,15 @@
   (require 'use-package-ensure)
   (setq use-package-always-ensure t))
 
-(require 'init-treemacs)
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Initialize Packages ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Emacs IRC client
-;; (require 'prelude-erc)
+;; (require 'prelude-erc) ;; Emacs IRC client
 (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
 (require 'prelude-ivy) ;; A mighty modern alternative to ido
 (require 'prelude-helm) ;; Interface for narrowing and search
-;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
+(require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
 (require 'prelude-key-chord) ;; Binds useful features to key combinations
 ;; (require 'prelude-evil)

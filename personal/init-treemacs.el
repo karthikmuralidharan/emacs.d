@@ -38,7 +38,6 @@
                         treemacs-git-mode)
              :bind (([f8]        . treemacs)
                     ("M-0"       . treemacs-select-window)
-                    ("C-x 1"     . treemacs-delete-other-windows)
                     ("C-x t 1"   . treemacs-delete-other-windows)
                     ("C-x t t"   . treemacs)
                     ("C-x t b"   . treemacs-bookmark)
@@ -50,7 +49,7 @@
              (setq treemacs-collapse-dirs           (if treemacs-python-executable 3 0)
                    treemacs-sorting                 'alphabetic-case-insensitive-desc
                    treemacs-follow-after-init       t
-                   treemacs-is-never-other-window   t
+                   treemacs-is-never-other-window   nil
                    treemacs-silent-filewatch        t
                    treemacs-silent-refresh          t
                    treemacs-width                   30)

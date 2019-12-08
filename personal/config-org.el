@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Emacs Prelude: Yasnippet.
+;;; config-org.el --- Emacs Prelude: ORG mode configurations.
 ;;
 ;; Author: Karthik Muralidharan
 ;; Version: 1.0.0
@@ -29,10 +29,24 @@
 
 ;;; Code:
 
+(prelude-require-package 'org-bullets)
 
-;;; Adds yasnippet support
-(prelude-require-package 'yasnippet)
-(yas-global-mode +1)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-(provide 'init-yasnippet)
-;;; init-yasnippet.el ends here
+;; Run/Highlight code using babel in org-mode
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (python . t)
+   (plantuml . t)
+   ;; Include other languages here...
+   ))
+;; Syntax highlight in #+BEGIN_SRC blocks
+(setq org-src-fontify-natively t)
+;; Don't prompt before running code in org
+(setq org-confirm-babel-evaluate nil)
+;; Fix an incompatibility between the ob-async and ob-ipython packages
+(setq ob-async-no-async-languages-alist '("ipython"))
+
+(provide 'config-org)
+;;; config-org.el ends here
