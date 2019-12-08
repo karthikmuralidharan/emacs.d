@@ -28,3 +28,5 @@ prelude-cheatsheet.aux
 prelude-cheatsheet.log
 .lsp-session-*
 .cache/**
+*.sqlite
+mspyls/**
