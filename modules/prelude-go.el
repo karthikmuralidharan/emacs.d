@@ -56,10 +56,6 @@
       (define-key map (kbd "C-c b") 'go-run)
       (define-key map (kbd "C-h f") 'godoc-at-point))
 
-    ;; gofmt on save
-    (add-hook 'before-save-hook 'lsp-format-buffer nil t)
-    (add-hook 'before-save-hook 'lsp-organize-imports nil t)
-
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
 
@@ -68,8 +64,6 @@
 
     ;; CamelCase aware editing operations
     (subword-mode +1)
-
-
 
     (with-eval-after-load 'flycheck
       "Enable golangci-lint."
@@ -80,8 +74,7 @@
                                          go-test
                                          go-errcheck))
       (setq flycheck-golangci-lint-fast t)
-      (flycheck-golangci-lint-setup))
-    )
+      (flycheck-golangci-lint-setup)))
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 

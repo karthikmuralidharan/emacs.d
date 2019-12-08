@@ -51,6 +51,12 @@
     :bind (:map lsp-mode-map
                 ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)))
 
+  ;; Microsoft python-language-server support
+  (use-package lsp-python-ms
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-python-ms)
+                           (lsp-deferred))))
+
   ;; Debug
   (use-package dap-mode
     :diminish
@@ -66,23 +72,10 @@
            (python-mode . (lambda () (require 'dap-python)))
            (ruby-mode . (lambda () (require 'dap-ruby)))
            (go-mode . (lambda () (require 'dap-go)))
-           (java-mode . (lambda () (require 'dap-java)))
            ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))
            (php-mode . (lambda () (require 'dap-php)))
            (elixir-mode . (lambda () (require 'dap-elixir)))
-           ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))))
-
-  ;; Microsoft python-language-server support
-  (use-package lsp-python-ms
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-python-ms)
-                           (lsp-deferred))))
-
-  ;; Java support
-  (use-package lsp-java
-    :hook (java-mode . (lambda ()
-                         (require 'lsp-java)
-                         (lsp-deferred)))))
+           ((js-mode js2-mode) . (lambda () (require 'dap-chrome))))))
 
 (provide 'config-lsp)
 ;;; config-lsp.el ends here
