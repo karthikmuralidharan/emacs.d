@@ -30,3 +30,4 @@ prelude-cheatsheet.log
 .cache/**
 *.sqlite
 mspyls/**
+.dap-breakpoints
