@@ -32,15 +32,23 @@
 (with-eval-after-load 'lsp-mode
   ;; Additional LSP mode configurations
   (setq lsp-auto-guess-root t)
-  (add-hook 'prog-mode-hook #'lsp-deferred)
+  (setq lsp-ui-doc-enable nil)
 
+  ;; Programming mode hooks
+  (add-hook 'go-mode-hook #'lsp-deferred)
+  (add-hook 'dart-mode-hook #'lsp-deferred)
+
+  ;; configure clients
   (use-package lsp-clients
   :ensure nil
   :functions (lsp-format-buffer lsp-organize-imports)
-  :hook (go-mode . (lambda ()
-                     "Format and add/delete imports."
-                     (add-hook 'before-save-hook #'lsp-format-buffer t t)
-                     (add-hook 'before-save-hook #'lsp-organize-imports t t)))
+  :hook ((go-mode . (lambda ()
+                      "Format and add/delete imports."
+                      (add-hook 'before-save-hook #'lsp-organize-imports t t)
+                      (add-hook 'before-save-hook #'lsp-format-buffer t t)))
+         (dart-mode . (lambda ()
+                      "Format and add/delete imports."
+                      (add-hook 'before-save-hook #'lsp-organize-imports t t))))
   :init
   (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))
   (unless (executable-find "rls")

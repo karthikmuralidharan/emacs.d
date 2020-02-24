@@ -30,6 +30,13 @@
 ;;; Code:
 
 
+(require 'prelude-helm)
+
+;; enable Helm version of Projectile with replacment commands
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

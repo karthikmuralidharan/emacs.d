@@ -74,7 +74,8 @@
                                          go-test
                                          go-errcheck))
       (setq flycheck-golangci-lint-fast t)
-      (flycheck-golangci-lint-setup)))
+      (flycheck-golangci-lint-setup))
+    )
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 

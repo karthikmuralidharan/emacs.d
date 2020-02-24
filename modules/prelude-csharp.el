@@ -1,14 +1,17 @@
-;;; init-flutter.el --- Emacs Prelude: Flutter setup.
+;;; prelude-c-sharp.el --- Emacs Prelude: cc-mode configuration.
 ;;
-;; Author: Karthik Muralidharan
+;; Copyright © 2011-2018 Bozhidar Batsov
+;;
+;; Author: Bozhidar Batsov <bozhidar@batsov.com>
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
-;; Keywords: convenience go
+;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 
-;; Prelude configuration for Go
+;; Some basic configuration for cc-mode and the modes derived from it.
 
 ;;; License:
 
@@ -29,25 +32,18 @@
 
 ;;; Code:
 
-;; Assuming usage with dart-mode
-(use-package dart-mode
-  :after (projectile lsp)
-  :init (setq dart-format-on-save t)
-  :config
-  (with-eval-after-load 'projectile
-    (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-    (add-to-list 'projectile-project-root-files-bottom-up "BUILD")))
+(require 'prelude-programming)
+(prelude-require-packages '(csharp-mode omnisharp))
 
-(use-package flutter
-  :after dart-mode
-  :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-or-hot-reload)))
+(defun my-csharp-mode-hook ()
+  ;; enable the stuff you want for C# here
+  (electric-pair-mode 1)       ;; Emacs 24
+  (electric-pair-local-mode 1) ;; Emacs 25
+  )
 
-;; Optional
-(use-package flutter-l10n-flycheck
-  :after flutter
-  :config
-  (flutter-l10n-flycheck-setup))
+(add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
 
-(provide 'init-flutter)
-;;; init-flutter.el ends here
+(provide 'prelude-csharp)
+
+;;; prelude-csharp.el ends here

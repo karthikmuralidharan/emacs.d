@@ -32,3 +32,5 @@ prelude-cheatsheet.log
 mspyls/**
 mc-lists
 .dap-breakpoints
+.extension/
+transient/

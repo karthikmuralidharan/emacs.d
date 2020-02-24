@@ -50,9 +50,9 @@
   ;; formats the buffer before saving
   (add-hook 'before-save-hook 'tide-format-before-save)
 
-  (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
-
-  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook))))
+  ;; (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
+  ;; (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook)))
+  )
 
 (provide 'prelude-ts)
 
