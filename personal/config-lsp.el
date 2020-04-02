@@ -37,6 +37,7 @@
   ;; Programming mode hooks
   (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'dart-mode-hook #'lsp-deferred)
+  (add-hook 'csharp-mode-hook #'lsp-deferred)
 
   ;; configure clients
   (use-package lsp-clients

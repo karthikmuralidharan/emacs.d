@@ -37,6 +37,7 @@
                             go-projectile
                             gotest
                             go-tag
+                            go-impl
                             flycheck-golangci-lint))
 
 (require 'go-projectile)
