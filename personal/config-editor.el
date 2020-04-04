@@ -32,10 +32,11 @@
 
 (require 'prelude-helm)
 
-;; enable Helm version of Projectile with replacment commands
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
+;; ;; enable Helm version of Projectile with replacment commands
+;; (setq projectile-completion-system 'helm)
+;; (helm-projectile-on)
 
+(mac-auto-operator-composition-mode)
 
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
