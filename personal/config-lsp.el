@@ -33,6 +33,7 @@
   ;; Additional LSP mode configurations
   (setq lsp-auto-guess-root t)
   (setq lsp-ui-doc-enable nil)
+  (setq lsp-enable-file-watchers nil)
 
   ;; Programming mode hooks
   (add-hook 'go-mode-hook #'lsp-deferred)
@@ -43,7 +44,12 @@
   (use-package lsp-clients
   :ensure nil
   :functions (lsp-format-buffer lsp-organize-imports)
-  :hook ((go-mode . (lambda ()
+      :hook (
+                (java-mode . (lambda ()
+                               "Format and add/delete imports."
+                               (add-hook 'before-save-hook #'lsp-organize-imports t t)
+                               (add-hook 'before-save-hook #'lsp-format-buffer t t)))
+                (go-mode . (lambda ()
                       "Format and add/delete imports."
                       (add-hook 'before-save-hook #'lsp-organize-imports t t)
                       (add-hook 'before-save-hook #'lsp-format-buffer t t)))
@@ -64,27 +70,29 @@
   (use-package lsp-python-ms
     :hook (python-mode . (lambda ()
                            (require 'lsp-python-ms)
-                           (lsp-deferred))))
+                           (lsp-deferred)))))
 
-  ;; Debug
-  (use-package dap-mode
+(use-package dap-mode
     :diminish
     :functions dap-hydra/nil
+    :ensure t :after lsp-mode
+    :config
+    (dap-mode t)
+    (dap-ui-mode t)
     :bind (:map lsp-mode-map
-                ("<f5>" . dap-debug)
-                ("M-<f5>" . dap-hydra))
+              ("<f5>" . dap-debug)
+              ("M-<f5>" . dap-hydra))
     :hook ((after-init . dap-mode)
-           (dap-mode . dap-ui-mode)
-           (dap-session-created . (lambda (&_rest) (dap-hydra)))
-           (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))
-
-           (python-mode . (lambda () (require 'dap-python)))
-           (ruby-mode . (lambda () (require 'dap-ruby)))
-           (go-mode . (lambda () (require 'dap-go)))
-           ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))
-           (php-mode . (lambda () (require 'dap-php)))
-           (elixir-mode . (lambda () (require 'dap-elixir)))
-           ((js-mode js2-mode) . (lambda () (require 'dap-chrome))))))
+              (dap-session-created . (lambda (&_rest) dap-hydra))
+              (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))
+              (java-mode . (lambda () (require 'dap-java)))
+              (python-mode . (lambda () (require 'dap-python)))
+              (ruby-mode . (lambda () (require 'dap-ruby)))
+              (go-mode . (lambda () (require 'dap-go)))
+              ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))
+              (php-mode . (lambda () (require 'dap-php)))
+              (elixir-mode . (lambda () (require 'dap-elixir)))
+              ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))))
 
 (provide 'config-lsp)
 ;;; config-lsp.el ends here

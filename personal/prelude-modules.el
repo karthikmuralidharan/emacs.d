@@ -1,5 +1,8 @@
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
+;; enable font ligatures
+(mac-auto-operator-composition-mode)
+
 ;; This is only needed once, near the top of the file
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -42,6 +45,7 @@
 (require 'prelude-xml)
 (require 'prelude-yaml)
 (require 'prelude-csharp)
+(require 'prelude-java)
 
 ;; (require 'prelude-coffee)
 ;; (require 'prelude-common-lisp)

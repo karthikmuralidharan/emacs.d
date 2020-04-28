@@ -36,8 +36,6 @@
 ;; (setq projectile-completion-system 'helm)
 ;; (helm-projectile-on)
 
-(mac-auto-operator-composition-mode)
-
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
